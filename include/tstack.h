@@ -11,11 +11,11 @@ class TStack {
     int top;
  public:
     Tstack() :top(-1) {}
-    void push(T val) {
+    void push(T value) {
       if (isFull()) {
         throw std::string("Stack is full");
       } else {
-        arr[++top] = val;
+        arr[++top] = value;
       }
     }
       const T& pop() {
