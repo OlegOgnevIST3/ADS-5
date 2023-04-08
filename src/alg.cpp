@@ -45,19 +45,19 @@ std::string Spaces(const std::string& str) {
   return adStr;
 }
 
-  std::string postStr;
+  std::string postfixStr;
   TStack<char, 100> stack;
   for (auto& operation : inf) {
     int priority = Priority(operation);
     if (priority == -1) {
-      postStr += operation;
+      postfixStr += operation;
     } else {
       if (stack.get() < priority || priority == 0 || stack.isEmpty()) {
         stack.push(operation);
       } else if (operation == ')') {
         char character = stack.get();
         while (Priority(character) >= priority) {
-          postStr += character;
+          postfixStr += character;
           stack.pop();
           character = stack.get();
         }
@@ -65,7 +65,7 @@ std::string Spaces(const std::string& str) {
       } else {
         char character = stack.get();
         while (Priority(character) >= priority) {
-          postStr += character;
+          postfixStr += character;
           stack.pop();
           character = stack.get();
         }
@@ -74,11 +74,11 @@ std::string Spaces(const std::string& str) {
     }
   }
   while (!stack.isEmpty()) {
-    postStr += stack.get();
+    postfixStr += stack.get();
     stack.pop();
   }
-  postStr = Spaces(postStr);
-  return postStr;
+  postfixStr = Spaces(postfixStr);
+  return postfixStr;
 }
 int calculate(const int& a, const int& b, const int& oper) {
   switch (oper) {
