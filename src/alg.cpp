@@ -44,7 +44,7 @@ std::string Spaces(const std::string& str) {
   }
   return adStr;
 }
-
+std::string infx2pstfx(std::string inf) {
   std::string postfixStr;
   TStack<char, 100> stack;
   for (auto& operation : inf) {
