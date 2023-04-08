@@ -24,21 +24,21 @@ int getPrior(char op) {
       priority[5].first = '/';
       priority[5].second = 3;
   }
-  int p = -1;
+  int prior = -1;
   for (int j = 0; j < 6; ++j) {
     if (op == priority[j].first) {
-      p = priority[j].second;
+      prior = priority[j].second;
       break;
     }
   }
-  return p;
+  return prior;
 }
 
 std::string miracle1(const std::string& s) {
   if (s.length() <= 2) return s;
-  int k = 2 - s.length() % 2;
-  std::string r(s, 0, k);
-  for (auto it = s.begin() + k; it != s.end();) {
+  int n = 2 - s.length() % 2;
+  std::string r(s, 0, n);
+  for (auto it = s.begin() + n; it != s.end();) {
     r += ' '; r += *it++;;
   }
   return r;
@@ -48,26 +48,26 @@ std::string infx2pstfx(std::string inf) {
   std::string work;
   Tstack<char, 100> stack1;
   for (auto& op : inf) {
-    int p = getPrior(op);
-    if (p == -1) {
+    int prior = getPrior(op);
+    if (prior == -1) {
       work += op;
     } else {
-      if (stack1.get() < p || p == 0 || stack1.isEmpty()) {
+      if (stack1.get() < prior || prior == 0 || stack1.isEmpty()) {
         stack1.push(op);
       } else if (op == ')') {
-        char y = stack1.get();
-        while (getPrior(y) >= p) {
-          work += y;
+        char sm = stack1.get();
+        while (getPrior(sm) >= prior) {
+          work += sm;
           stack1.pop();
-          y = stack1.get();
+          sm = stack1.get();
         }
         stack1.pop();
       } else {
-        char y = stack1.get();
-        while (getPrior(y) >= p) {
-          work += y;
+        char sm = stack1.get();
+        while (getPrior(sm) >= prior) {
+          work += sm;
           stack1.pop();
-          y = stack1.get();
+          sm = stack1.get();
         }
         stack1.push(op);
       }
@@ -92,7 +92,6 @@ int count(const int& a, const int& b, const int& oper) {
   return 0;
 }
 int eval(std::string pref) {
-  // добавьте код
   Tstack<int, 100> stack1;
   std::string num = "";
   for (size_t i = 0; i < pref.size(); i++) {
