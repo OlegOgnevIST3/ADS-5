@@ -33,7 +33,6 @@ int Priority(char operation) {
   }
   return p;
 }
-
 std::string Spaces(const std::string& str) {
   if (str.length() <= 2)
     return str;
